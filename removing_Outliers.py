@@ -17,49 +17,32 @@ Enter a list of numbers separated by commas.
 The script will display the modified dataset with outliers removed.
 
 """
-
-class RemoveOutliers:
-    i = 0
-    
-    def q1(self, num):
+class remove_outliers():
+    def q1q3(self, num):
         ln = len(num)
-        q1 = (25 / 100) * (ln + 1)
-        i = int(q1) - 1
-        q1 = num[i]  # Q1 value
-        q3 = (75 / 100) * (ln + 1)
-        i = int(q3) - 1
-        q3 = num[i]  # Q3 value
+        q1 = 25 / 100 * (ln + 1)
+        q1 = num[int(q1) - 1]
+        q3 = 75 / 100 * (ln + 1)
+        q3 = num[int(q3) - 1]
         iqr = q3 - q1
-        lf, hf = self.fencing(q3, q1, iqr)  # Assigning return values
-        return q3, q1, iqr, lf, hf
-
-    def fencing(self, q3, q1, iqr):
         lf = q1 - 1.5 * iqr
         hf = q3 + 1.5 * iqr
-        return lf, hf
+        self.remove(lf, hf)
 
-    def remove_out(self, lf, hf, num):
-        i = 0
-        c = 0
-        print("\n\n****************** WITH outliers *************\n\n", num)
-        while i < len(num):
-            if num[i] <= lf or num[i] >= hf: 
-                num.remove(num[i]) 
-                c += 1
-            else:
-                i += 1
-        print("\n\n****************REMOVED THE outliers****************** \n\n", num)   
-        print("\n\n There are ", c, " outliers")
+    def remove(self, lf, hf):
+        outliers = []
+        for i in range(len(num)):
+            if num[i] <= lf or num[i] >= hf:
+                outliers.append(num[i])
+        print("Outliers:", outliers)
+        print("Number of Outliers is = ",len(outliers))
+        num[:] = [x for x in num if x not in outliers]
+        print("Data without outliers:", num)
 
-RO = RemoveOutliers()
-num = input("Enter the number separated with comma ")
-num = list(map(int, num.split(",")))
-print(num)
-q3, q1, iqr, lf, hf = RO.q1(num)
-print("Lower fence:", lf)
-print("Higher fence:", hf)
-RO.remove_out(lf, hf, num)
-
+ro = remove_outliers()
+num = input("Enter numbers separated by spaces: ").split()  # give input with space
+num = list(map(int, num))  
+ro.q1q3(num)
 
 
 
