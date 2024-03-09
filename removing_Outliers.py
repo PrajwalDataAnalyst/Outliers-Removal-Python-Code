@@ -18,10 +18,9 @@ The script will display the modified dataset with outliers removed.
 
 """
 
-
-
 class RemoveOutliers:
-    i=0
+    i = 0
+    
     def q1(self, num):
         ln = len(num)
         q1 = (25 / 100) * (ln + 1)
@@ -31,54 +30,38 @@ class RemoveOutliers:
         i = int(q3) - 1
         q3 = num[i]  # Q3 value
         iqr = q3 - q1
-        self.fencing(q3, q1, iqr)  # Calling the method without assigning return value
+        lf, hf = self.fencing(q3, q1, iqr)  # Assigning return values
         return q3, q1, iqr, lf, hf
-
 
     def fencing(self, q3, q1, iqr):
         lf = q1 - 1.5 * iqr
         hf = q3 + 1.5 * iqr
-        return lf,hf
-    def remove_out(self,lf,hf,num):
-        lf=lf
-        hf=hf
-        num=num
-        i=0
-        c=0
-        print("\n\n****************** WITH outliers *************\n\n",num)
+        return lf, hf
+
+    def remove_out(self, lf, hf, num):
+        i = 0
+        c = 0
+        print("\n\n****************** WITH outliers *************\n\n", num)
         while i < len(num):
             if num[i] <= lf or num[i] >= hf: 
                 num.remove(num[i]) 
-                c+=1
-                
+                c += 1
             else:
                 i += 1
-        print("\n\n****************REMOVED THE outliers****************** \n\n",num)   
-        print("\n\n Their Are ",c," outliers")
-RO = RemoveOutliers()
-num = input("enter the number with commma sept ")
+        print("\n\n****************REMOVED THE outliers****************** \n\n", num)   
+        print("\n\n There are ", c, " outliers")
 
-num=list(map(int,num.split(",")))
+RO = RemoveOutliers()
+num = input("Enter the number separated with comma ")
+num = list(map(int, num.split(",")))
 print(num)
 q3, q1, iqr, lf, hf = RO.q1(num)
 print("Lower fence:", lf)
 print("Higher fence:", hf)
-RO.remove_out(lf,hf,num)
-
-
-# In[ ]:
+RO.remove_out(lf, hf, num)
 
 
 
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
 
 
 
