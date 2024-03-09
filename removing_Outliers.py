@@ -1,13 +1,23 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[ ]:
-
 
 # Remove Outlayers 
+"""
+Outliers Removal Python Code
+This Python script implements a method to remove outliers from a list of numbers using the lower and upper fences approach. Outliers are identified based on specified lower and upper fence values, and the script removes any data points falling outside this range.
 
+Features:
+Input: Accepts a list of numbers separated by commas.
+Outliers Removal: Implements the lower and upper fences method to identify and remove outliers from the dataset.
+Output: Displays the modified dataset with outliers removed.
+Usage:
+Run the script.
+Enter a list of numbers separated by commas.
+The script will display the modified dataset with outliers removed.
 
-# In[140]:
+"""
+
 
 
 class RemoveOutliers:
