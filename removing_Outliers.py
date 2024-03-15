@@ -27,15 +27,15 @@ class remove_outliers():
         iqr = q3 - q1
         lf = q1 - 1.5 * iqr
         hf = q3 + 1.5 * iqr
-        self.remove(lf, hf)
+        self.remove(num, lf, hf)
 
-    def remove(self, lf, hf):
+    def remove(self, num, lf, hf):
         outliers = []
         for i in range(len(num)):
             if num[i] <= lf or num[i] >= hf:
                 outliers.append(num[i])
         print("Outliers:", outliers)
-        print("Number of Outliers is = ",len(outliers))
+        print("Number of Outliers is = ", len(outliers))
         num[:] = [x for x in num if x not in outliers]
         print("Data without outliers:", num)
 
@@ -43,9 +43,3 @@ ro = remove_outliers()
 num = input("Enter numbers separated by spaces: ").split()  # give input with space
 num = list(map(int, num))  
 ro.q1q3(num)
-
-
-
-
-
-
